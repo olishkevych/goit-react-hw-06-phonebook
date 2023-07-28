@@ -1,7 +1,14 @@
 import styles from './Filter.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import setFilter from '../../redux/contactsReducer';
 
-export const Filter = ({ onFilterInput }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const onFilterInput = event => {
+    dispatch(setFilter(event.target.value));
+  };
+
   return (
     <div className={styles.wrapper}>
       <input
@@ -12,8 +19,4 @@ export const Filter = ({ onFilterInput }) => {
       ></input>
     </div>
   );
-};
-
-Filter.propTypes = {
-  onFilterInput: PropTypes.func.isRequired,
 };
