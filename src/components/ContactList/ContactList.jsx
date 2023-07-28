@@ -1,11 +1,11 @@
 import styles from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import removeContact from '../../redux/contactsReducer';
+import { removeContact } from '../../redux/contactsSlice.js';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.contacts.filter);
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
 
   const filteredContacts = () => {
     return contacts.filter(contact =>
@@ -13,16 +13,20 @@ export const ContactList = () => {
     );
   };
 
+  const handleRemoveContact = id => {
+    dispatch(removeContact(id));
+  };
+
   return (
     <ul>
-      {filteredContacts.map(contact => {
+      {contacts.map(contact => {
         return (
           <li className={styles.item} key={contact.id}>
             <span>{contact.name} </span>
             <span>{contact.number}</span>
             <button
               className={styles.removeBtn}
-              onClick={dispatch(removeContact(contact.id))}
+              onClick={() => handleRemoveContact(contact.id)}
             >
               &times;
             </button>
