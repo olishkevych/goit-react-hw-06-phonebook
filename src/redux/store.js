@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 const contactsPersistConfig = {
   key: 'contacts',
   storage,
-  whitelist: ['filter', 'contacts'],
+  whitelist: ['contacts'],
 };
 
 const persistedReducer = persistReducer(contactsPersistConfig, rootReducer);
