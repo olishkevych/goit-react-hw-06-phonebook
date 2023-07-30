@@ -3,13 +3,14 @@ import { nanoid } from 'nanoid';
 import { addContact } from '../../redux/contactsSlice';
 import styles from './ContactForm.module.css';
 import { useState } from 'react';
+import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
 
   const onInputChange = event => {
     event.target.name === 'number'
